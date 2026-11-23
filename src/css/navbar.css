@@ -1,0 +1,69 @@
+body {
+            overflow-x: hidden;
+            background-color: #f4f6f9;
+        }
+        /* Estructura del Sidebar */
+        #sidebar {
+            min-width: 260px;
+            max-width: 260px;
+            min-height: 100vh;
+            background-color: #1e293b; /* Azul pizarra oscuro */
+            color: #cbd5e1;
+            transition: all 0.3s;
+        }
+        #sidebar.collapsed {
+            margin-left: -260px;
+        }
+        .sidebar-header {
+            padding: 1.25rem;
+            background-color: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+        /* Títulos de las 4 secciones */
+        .sidebar-heading {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+            padding: 1.1rem 1.25rem 0.35rem;
+        }
+        /* Enlaces del menú */
+        #sidebar .nav-link {
+            color: #cbd5e1;
+            padding: 0.65rem 1.25rem;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        #sidebar .nav-link:hover {
+            background-color: #334155;
+            color: #ffffff;
+        }
+        #sidebar .nav-link.active {
+            background-color: #2563eb25;
+            color: #60a5fa;
+            border-left-color: #3b82f6;
+            font-weight: 600;
+        }
+        #sidebar .nav-link i.menu-icon {
+            width: 22px;
+            font-size: 0.95rem;
+            margin-right: 10px;
+            text-align: center;
+        }
+        /* Submenús */
+        .submenu .nav-link {
+            padding-left: 3rem !important;
+            font-size: 0.86rem !important;
+        }
+        .chevron-icon {
+            margin-left: auto;
+            font-size: 0.75rem;
+            transition: transform 0.2s;
+        }
+        [aria-expanded="true"] .chevron-icon {
+            transform: rotate(90deg);
+        }
