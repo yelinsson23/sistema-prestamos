@@ -15,15 +15,15 @@
             </li>
 
             <!-- SECCIÓN 1: CLIENTES -->
-            <li class="sidebar-heading">Clientes</li>
+            <li class="sidebar-heading">Clientes/Garantes</li>
             <li class="nav-item">
-                <a href="#clientes-registro" class="nav-link" data-vista="clientes-registro">
-                    <i class="fas fa-user-plus menu-icon"></i> Registro y Edición
+                <a href="Clientes/agregarCliente.php" class="nav-link" data-vista="clientes-registro">
+                    <i class="fas fa-user-plus menu-icon"></i> Registrar
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#clientes-consulta" class="nav-link" data-vista="clientes-consulta">
-                    <i class="fas fa-users menu-icon"></i> Consulta de Clientes
+                    <i class="fas fa-users menu-icon"></i> Consultar
                 </a>
             </li>
 

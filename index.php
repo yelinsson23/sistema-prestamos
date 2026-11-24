@@ -2,7 +2,17 @@
 <html lang="en">
 
 <head>
-    <?php include("head.php") ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="src/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="src/css/datatables.min.css">
+
+    <link rel="stylesheet" href="src/css/all.min.css">
+
+    <link rel="stylesheet" href="src/css/navbar.css">
 </head>
 
 <body>
@@ -35,7 +45,14 @@
         </div>
     </div>
 
-    <?php include("scripts.php"); ?>
+<!-- 1. jQuery (siempre primero) -->
+<script src="src/js/jquery-4.1.0.js"></script>
+
+<!-- 2. JS de Bootstrap 5 -->
+<script src="src/js/bootstrap.bundle.min.js"></script>
+
+<!-- 3. JS de DataTables -->
+<script src="src/js/datatables.min.js"></script>
 </body>
 
 </html>
