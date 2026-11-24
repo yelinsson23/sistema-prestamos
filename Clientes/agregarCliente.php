@@ -5,6 +5,11 @@
     <?php
     include("../head.php")
     ?>
+    <style>
+        /* .id-cliente{
+            display: none;
+        } */
+    </style>
 </head>
 
 <body>
@@ -33,11 +38,36 @@
                 <!-- Aquí cargas tus archivos PHP o muestras/ocultas las vistas -->
 
                 <h1>HOLA MUNDDO</h1>
+
+                <div class="contenedor">
+                    <div class="table-responsive col-lg-12 px-0">
+                        <table class="table table-hover table-condensed table-bordered" id="tablaClientes">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Documento</th>
+                                    <th>Estado Civil</th>
+                                    <th>Limite de Credito</th>
+                                    <th>Telefono Prin.</th>
+                                    <th>Nacionalidad</th>
+                                    <th class='text-right'>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
 
     <?php include("../scripts.php"); ?>
+    <script src="../src/js/agregarClientes.js"></script>
 </body>
 
 </html>
