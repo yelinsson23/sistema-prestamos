@@ -16,8 +16,9 @@
     <div class="d-flex">
         <?php
         include("../bar.php");
-
+        
         ?>
+        <link rel="stylesheet" href="../src/css/general.css">
         <!-- ÁREA DE CONTENIDO PRINCIPAL -->
         <div class="flex-grow-1 d-flex flex-column">
             <!-- Barra Superior (Navbar) -->
@@ -45,14 +46,15 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
                                     <th>Documento</th>
                                     <th>Estado Civil</th>
                                     <th>Limite de Credito</th>
                                     <th>Telefono Prin.</th>
                                     <th>Nacionalidad</th>
-                                    <th class='text-right'>Actions</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
 

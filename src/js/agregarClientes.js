@@ -1,11 +1,10 @@
-let tablaCliente;
+var tablaCliente;
 
 function getClientes(parametros = []) {
-
-    var datos = {
-        'getClientes':1,
-        'parametros':parametros
-    }
+  var datos = {
+    getClientes: 1,
+    parametros: parametros,
+  };
 
   $.ajax({
     type: "GET",
@@ -15,6 +14,10 @@ function getClientes(parametros = []) {
       //$("#resultados").html("Mensaje: Cargando...");
     },
     success: function (datos) {
+      result = JSON.parse(datos);
+      console.log(result);
+      tablaCliente.clear();
+      tablaCliente.rows.add(result.data).draw();
       //$("#resultados").html(datos);
     },
   });
@@ -24,7 +27,9 @@ $("#tablaClientes").ready(function () {
   tablaCliente = $("#tablaClientes")
     .removeAttr("width")
     .DataTable({
+      autoWidth: false,
       columnDefs: [
+        { width: "120px", targets: 5 },
         {
           targets: [0], // Índice de la columna a ocultar (0 es la primera, 8 sería la novena)
           visible: false, // La oculta visualmente sin romper los anchos de la tabla
@@ -41,15 +46,15 @@ $("#tablaClientes").ready(function () {
           className: "id-cliente",
         },
         {
-          data: "nombre",
+          data: "nombres_cliente",
           className: "nombre",
         },
         {
-          data: "apellido",
+          data: "apellidos_clientes",
           className: "apellido",
         },
         {
-          data: "documento",
+          data: "numero_documento",
           className: "documento",
         },
         {
@@ -61,19 +66,25 @@ $("#tablaClientes").ready(function () {
           className: "limite-credito",
         },
         {
-          data: "telefono_principal",
+          data: "numero",
           className: "telefono-principal",
         },
         {
-          data: "nacionalidad",
+          data: "descripcion_nacionalidad",
           className: "nacionalidad",
+        },
+        {
+          data: "estado",
+          className: "estado",
         },
         {
           data: null,
           className: "action",
           defaultContent:
-            "<button type='button' class='btn btn-secondary v_note'> <i class='fas fa-eye'></i></button>",
+            "<button type='button' class='btn btn-secondary'> <i class='fas fa-eye'></i></button>",
         },
       ],
     });
+
+  getClientes();
 });
