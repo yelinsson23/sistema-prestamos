@@ -1,6 +1,15 @@
 var tablaCliente;
 
-function getClientes(parametros = []) {
+function getClientes() {
+  parametros = {
+    input: $("#filtroGeneral").val(),
+    estado_civil: $("#filtroEstadoCivil").val(),
+    nacionalidad: $("#filtroNacionalidad").val(),
+    garante: $("#filtroClienteGarante").val(),
+    estado: $("#filtroEstado").val(),
+    rangoMin: $("#rangoMin").val(),
+    rangoMax: $("#rangoMax").val(),
+  };
   var datos = {
     getClientes: 1,
     parametros: parametros,
@@ -8,17 +17,19 @@ function getClientes(parametros = []) {
 
   $.ajax({
     type: "GET",
-    url: "../ajax/agregarClientes.php",
+    url: "../ajax/Clientes.php",
     data: datos,
     beforeSend: function (objeto) {
       //$("#resultados").html("Mensaje: Cargando...");
     },
     success: function (datos) {
+      tablaCliente.clear().draw();
       result = JSON.parse(datos);
       console.log(result);
-      tablaCliente.clear();
+      if(result.data!=null){
       tablaCliente.rows.add(result.data).draw();
-      //$("#resultados").html(datos);
+
+      }
     },
   });
 }
@@ -75,7 +86,14 @@ $("#tablaClientes").ready(function () {
         },
         {
           data: "estado",
-          className: "estado",
+          className: "estado ",
+          render: function (data) {
+            if (data == "1") {
+              return "<span class='text-success' >Activo</span>";
+            } else {
+              return "<span class='text-danger'>Inactivo</span>";
+            }
+          },
         },
         {
           data: null,
@@ -85,6 +103,74 @@ $("#tablaClientes").ready(function () {
         },
       ],
     });
+
+  getClientes();
+});
+
+$("#btnLimpiarFiltros").on("click", function () {
+  $("#filtroGeneral").val("");
+  $("#filtroEstadoCivil, #filtroNacionalidad, #filtroEstado").val("");
+  $("#rangoMin").val(0);
+  $("#rangoMax").val($("#rangoMax").attr("max"));
+  actualizarSlider();
+});
+
+$("#rangoMin, #rangoMax").on("input", actualizarSlider);
+
+function actualizarSlider() {
+  let minVal = parseInt($("#rangoMin").val());
+  let maxVal = parseInt($("#rangoMax").val());
+  const maxLimite = parseInt($("#rangoMax").attr("max"));
+
+  // Evita que el mínimo supere al máximo
+  if (minVal > maxVal) {
+    [minVal, maxVal] = [maxVal, minVal];
+    $("#rangoMin").val(minVal);
+    $("#rangoMax").val(maxVal);
+  }
+
+  // Actualiza etiqueta con formato de moneda
+  $("#etiquetaRangoCredito").text(
+    `RD$ ${minVal.toLocaleString("en-US")} - RD$ ${maxVal.toLocaleString("en-US")}`,
+  );
+
+  // Colorea la barra activa entre ambos puntos
+  const porc1 = (minVal / maxLimite) * 100;
+  const porc2 = (maxVal / maxLimite) * 100;
+  $("#sliderTrack").css(
+    "background",
+    `linear-gradient(to right, #dee2e6 ${porc1}%, #0d6efd ${porc1}%, #0d6efd ${porc2}%, #dee2e6 ${porc2}%)`,
+  );
+}
+actualizarSlider();
+obtenerNacionalidades();
+function obtenerNacionalidades() {
+  datos = {
+    getNacionalidades: 1,
+  };
+  $.ajax({
+    type: "GET",
+    url: "../ajax/Nacionalidades.php",
+    data: datos,
+    success: function (datos) {
+      result = JSON.parse(datos);
+      $.each(result.data, function (i, d) {
+        $(document)
+          .find("#filtroNacionalidad")
+          .append(
+            "<option value='" +
+              d.id_nacionalidad +
+              "'>" +
+              d.descripcion_nacionalidad +
+              "</option>",
+          );
+      });
+    },
+  });
+}
+
+$("#btnBuscar").on("click", function (e) {
+  e.preventDefault();
 
   getClientes();
 });
