@@ -20,6 +20,8 @@ if (isset($_GET['getClientes'])) {
     $parametros_sql[] = $rango_min;
     $parametros_sql[] = $rango_max;
 
+    $inner = "";
+
     if ($estado != "") {
         $parametros_sql[] = $estado;
         $param_type .= "i";
@@ -47,13 +49,12 @@ if (isset($_GET['getClientes'])) {
     if ($garante == 0) {
         $where .= "and t1.limite_credito IS NOT NULL";
     } else if ($garante == 1) {
-        // inner join a cliente_garante
+        $inner = "INNER JOIN clientes_garantes t4 on t4.id_garante=t1.id_cliente";
     }
-
 
     $con = new DB();
     $usuarios = $con->select("SELECT t1.id_cliente,t1.nombres_cliente,t1.apellidos_clientes,t1.numero_documento, t1.estado_civil,t1.limite_credito,t3.numero,t2.descripcion_nacionalidad, t1.estado 
-    FROM clientes t1 INNER JOIN nacionalidades t2 on t1.nacionalidades_id=t2.id_nacionalidad INNER JOIN clientes_telefonos t3 on t3.clientes_id=t1.id_cliente 
+    FROM clientes t1 INNER JOIN nacionalidades t2 on t1.nacionalidades_id=t2.id_nacionalidad INNER JOIN clientes_telefonos t3 on t3.clientes_id=t1.id_cliente $inner
     WHERE t3.principal=1 $where", $param_type, $parametros_sql);
     echo json_encode(array('data' => $usuarios));
 }

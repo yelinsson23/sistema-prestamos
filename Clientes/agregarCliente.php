@@ -36,7 +36,6 @@
 
             <!-- Contenedor  -->
             <main class="p-4" id="contenedorVistas">
-
                 <div class="contenedor">
                     <div class="card mb-3 shadow-sm">
                         <div class="card-body">
